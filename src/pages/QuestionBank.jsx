@@ -1,90 +1,121 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Upload, HelpCircle } from "lucide-react";
+import { HelpCircle, Search } from "lucide-react";
 
 const QuestionBank = () => {
-  const [questions, setQuestions] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [selectedCourse, setSelectedCourse] = useState("All");
+  const [data, setData] = useState([]);
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState("");
+  const [selectedModule, setSelectedModule] = useState("");
+  const [selectedMarks, setSelectedMarks] = useState("");
 
   useEffect(() => {
-    fetch("/data/questionBankData.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setQuestions(data);
-        setFiltered(data);
+    // Fetch from public folder
+    fetch("/data/questionBank.json")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch JSON");
+        return res.json();
       })
+      .then((json) => setData(json))
       .catch((err) => console.error("Error loading dataset:", err));
   }, []);
 
-  const handleFilter = (course) => {
-    setSelectedCourse(course);
-    if (course === "All") {
-      setFiltered(questions);
-    } else {
-      setFiltered(questions.filter((q) => q.course === course));
-    }
-  };
+  const handleSearch = () => {
+    let filtered = data;
 
-  const uniqueCourses = ["All", ...new Set(questions.map((q) => q.course))];
+    if (selectedCourse) filtered = filtered.filter((q) => q.course === selectedCourse);
+    if (selectedModule) filtered = filtered.filter((q) => q.module === selectedModule);
+    if (selectedMarks) filtered = filtered.filter((q) => q.markWeightage === selectedMarks);
+
+    // Flatten questions array with id and question
+    const questionsList = filtered.flatMap((q) =>
+      q.questions.map((ques) => ({
+        id: ques.id,
+        question: ques.question,
+      }))
+    );
+
+    setFilteredQuestions(questionsList);
+  };
 
   return (
     <Card className="p-6 rounded-2xl border-border bg-gradient-card">
-      <div className="flex items-center justify-between mb-6">
-        <h3 className="text-xl font-semibold">Question Bank</h3>
-        <Button size="sm" className="rounded-lg">
-          <Upload className="w-4 h-4 mr-2" />
-          Add Questions
-        </Button>
-      </div>
+      <h3 className="text-xl font-semibold mb-4">Question Bank</h3>
 
       {/* Filters */}
-      <div className="flex gap-3 mb-6 flex-wrap">
-        {uniqueCourses.map((course) => (
-          <Button
-            key={course}
-            size="sm"
-            variant={selectedCourse === course ? "default" : "outline"}
-            onClick={() => handleFilter(course)}
-          >
-            {course}
-          </Button>
-        ))}
+      <div className="flex gap-4 mb-4 flex-wrap">
+        <select
+          className="border rounded px-3 py-2"
+          value={selectedCourse}
+          onChange={(e) => setSelectedCourse(e.target.value)}
+        >
+          <option value="" disabled>
+            Select Course
+          </option>
+          <option value="Data Science">Data Science</option>
+          <option value="Database Management System">Database Management System</option>
+          <option value="Web Technology">Web Technology</option>
+          <option value="Theory of Computation">Theory of Computation</option>
+        </select>
+
+        <select
+          className="border rounded px-3 py-2"
+          value={selectedModule}
+          onChange={(e) => setSelectedModule(e.target.value)}
+        >
+          <option value="" disabled>
+            Select Module
+          </option>
+          {[1, 2, 3, 4, 5, 6].map((m) => (
+            <option key={m} value={m.toString()}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        <select
+          className="border rounded px-3 py-2"
+          value={selectedMarks}
+          onChange={(e) => setSelectedMarks(e.target.value)}
+        >
+          <option value="" disabled>
+            Select Marks
+          </option>
+          {[1, 2, 6, 7, 10, 12].map((m) => (
+            <option key={m} value={m.toString()}>
+              {m}
+            </option>
+          ))}
+        </select>
+
+        <Button className="flex items-center gap-2" onClick={handleSearch}>
+          <Search className="w-4 h-4" />
+          Search
+        </Button>
       </div>
 
       {/* Questions List */}
       <div className="space-y-3">
-        {filtered.map((q, index) => (
-          <div
-            key={index}
-            className="p-4 bg-secondary/50 rounded-xl hover:bg-secondary transition-colors"
-          >
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <HelpCircle className="w-4 h-4 text-primary" />
-                  <p className="font-medium">{q.question}</p>
-                </div>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                  <span>{q.module}</span>
-                  <span>•</span>
-                  <span>{q.marks} marks</span>
-                  <span>•</span>
-                  <span
-                    className={`px-2 py-0.5 rounded ${
-                      q.difficulty === "Easy"
-                        ? "bg-primary/10 text-primary"
-                        : "bg-accent/10 text-accent"
-                    }`}
-                  >
-                    {q.difficulty}
-                  </span>
-                </div>
+        {filteredQuestions.length > 0 ? (
+          filteredQuestions.map((q) => (
+            <div
+              key={q.id + q.question} // ensure unique key
+              className="p-4 bg-secondary/50 rounded-xl hover:bg-secondary transition-colors"
+            >
+              <div className="flex items-center gap-2">
+                <HelpCircle className="w-4 h-4 text-primary" />
+                <p className="font-medium">
+                  {q.id}. {q.question}
+                </p>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-muted-foreground mt-4">
+            No questions found for selected filters.
+          </p>
+        )}
       </div>
     </Card>
   );

@@ -2,16 +2,10 @@ import { MainLayout } from "@/components/layout/MainLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Upload, FileText, HelpCircle, Layers, Play, Pause, Clock } from "lucide-react";
+import { Upload, FileText, Layers, Play, Pause, Clock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import QuestionBank from "@/pages/QuestionBank";
-
-const questionBank = [
-  { question: "What is Newton's First Law?", module: "Module 1", marks: 5, difficulty: "Easy" },
-  { question: "Explain Photosynthesis process", module: "Module 2", marks: 10, difficulty: "Medium" },
-  { question: "Solve: ∫x²dx", module: "Module 3", marks: 5, difficulty: "Easy" },
-];
+import QuestionBank from "@/pages/QuestionBank"; // modular QuestionBank
 
 const flashcards = [
   { front: "What is the speed of light?", back: "299,792,458 m/s" },
@@ -75,49 +69,9 @@ const StudyTools = () => {
             </Card>
           </TabsContent>
 
+          {/* Render modular QuestionBank */}
           <TabsContent value="questions" className="mt-6">
-            <Card className="p-6 rounded-2xl border-border bg-gradient-card">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold">Question Bank</h3>
-                <Button size="sm" className="rounded-lg">
-                  <Upload className="w-4 h-4 mr-2" />
-                  Add Questions
-                </Button>
-              </div>
-
-              <div className="space-y-3">
-                {questionBank.map((q, index) => (
-                  <div
-                    key={index}
-                    className="p-4 bg-secondary/50 rounded-xl hover:bg-secondary transition-colors"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <HelpCircle className="w-4 h-4 text-primary" />
-                          <p className="font-medium">{q.question}</p>
-                        </div>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <span>{q.module}</span>
-                          <span>•</span>
-                          <span>{q.marks} marks</span>
-                          <span>•</span>
-                          <span
-                            className={`px-2 py-0.5 rounded ${
-                              q.difficulty === "Easy"
-                                ? "bg-primary/10 text-primary"
-                                : "bg-accent/10 text-accent"
-                            }`}
-                          >
-                            {q.difficulty}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
+            <QuestionBank />
           </TabsContent>
 
           <TabsContent value="flashcards" className="mt-6">
