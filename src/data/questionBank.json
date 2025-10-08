@@ -1,0 +1,219 @@
+[
+  {
+    "course": "Data Science",
+    "module": "1",
+    "markWeightage": "1",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is data science?"
+      },
+      {
+        "id": 2,
+        "question": "What is Hypothesis Testing?"
+      },
+      {
+        "id": 3,
+        "question": "What are the advantages of a decision tree?"
+      },
+      {
+        "id": 4,
+        "question": "Define clustering."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "2",
+    "markWeightage": "1",
+    "questions": [
+      {
+        "id": 1,
+        "question": "List any two applications of data science in the healthcare domain."
+      },
+      {
+        "id": 2,
+        "question": "What is EDA?"
+      },
+      {
+        "id": 3,
+        "question": "Define median."
+      },
+      {
+        "id": 4,
+        "question": "List the types of machine learning."
+      },
+      {
+        "id": 5,
+        "question": "List applications of unsupervised learning."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "4",
+    "markWeightage": "1",
+    "questions": [
+      {
+        "id": 1,
+        "question": "How do supervised models differ from unsupervised models?"
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "2",
+    "markWeightage": "3",
+    "questions": [
+      {
+        "id": 1,
+        "question": "List any two strategies used to handle missing data."
+      },
+      {
+        "id": 2,
+        "question": "Compare regression and classification."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "3",
+    "markWeightage": "3",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Write short on correlation analysis."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "4",
+    "markWeightage": "3",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Construct a box plot for the given data: 18, 27, 34, 52, 54, 59, 61, 68, 78, 82, 85, 87, 91, 93, 100."
+      },
+      {
+        "id": 2,
+        "question": "Enumerate the benefits and limitations of content-based recommendation."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "6",
+    "markWeightage": "3",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Discuss exploring various datasets in different repositories."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "1",
+    "markWeightage": "6",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Classify Python fundamental libraries."
+      },
+      {
+        "id": 2,
+        "question": "Write in detail the application of data science in any five domains."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "4",
+    "markWeightage": "6",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Illustrate decision trees with suitable examples."
+      },
+      {
+        "id": 2,
+        "question": "Explain different types of clustering."
+      },
+      {
+        "id": 3,
+        "question": "Describe K means clustering with an example."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "5",
+    "markWeightage": "6",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Develop a case study of Sentiment Analysis in Twitter."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "6",
+    "markWeightage": "6",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Discuss about content-based filtering."
+      },
+      {
+        "id": 2,
+        "question": "Discuss in detail the various Supervised Machine Learning techniques."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "4",
+    "markWeightage": "12",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Describe in detail about exploratory data analysis."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "2",
+    "markWeightage": "12",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Construct linear and logistics regression with an example."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "5",
+    "markWeightage": "12",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Explain regression analysis and types."
+      }
+    ]
+  },
+  {
+    "course": "Data Science",
+    "module": "6",
+    "markWeightage": "12",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Explain in detail about the recommender systems and its classification."
+      }
+    ]
+  }
+]

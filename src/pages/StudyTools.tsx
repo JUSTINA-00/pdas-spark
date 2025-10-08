@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Upload, FileText, HelpCircle, Layers, Play, Pause, Clock } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import QuestionBank from "@/pages/QuestionBank";
 
 const questionBank = [
   { question: "What is Newton's First Law?", module: "Module 1", marks: 5, difficulty: "Easy" },
