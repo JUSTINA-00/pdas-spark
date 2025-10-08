@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { BookOpen, CheckCircle, Clock, AlertCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const upcomingClasses = [
   { subject: "Mathematics", time: "9:00 AM", room: "Room 301" },
@@ -17,12 +19,22 @@ const upcomingAssignments = [
 ];
 
 const Dashboard = () => {
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user?.email) {
+        setUserEmail(user.email.split("@")[0]);
+      }
+    });
+  }, []);
+
   return (
     <MainLayout>
       <div className="space-y-6 animate-fade-in">
         <div>
           <h1 className="text-3xl font-bold text-foreground mb-2">
-            Welcome back, Justina 👋
+            Welcome back, {userEmail || "Student"} 👋
           </h1>
           <p className="text-muted-foreground">
             Here's what's happening with your studies today
